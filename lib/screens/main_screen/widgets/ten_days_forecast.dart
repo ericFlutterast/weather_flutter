@@ -46,8 +46,7 @@ class TenDaysForecast extends StatelessWidget {
             ),
             Expanded(
               child: ListView.separated(
-                //physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: false,
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: forecastList.length,
                 itemBuilder: (context, index) {
                   List<dynamic> dateList = forecastList[index].date.split('-').toList();
