@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:weather_flutter/models/condition_model.dart';
 import 'package:weather_flutter/models/week_forecast_parametrs.dart';
 
 import 'degrees_circle.dart';
@@ -30,7 +31,7 @@ class DayForecastItem extends StatelessWidget {
       children: [
         Expanded(
           child: Text(
-            weekday.length == 1 ? _weekday(int.parse(weekday)) : weekday,
+            weekday.length == 1 ? Weekdays().getValue(int.parse(weekday))! : weekday,
             style: const TextStyle(
               fontSize: 20,
               color: Color.fromRGBO(253, 251, 253, 1),
@@ -87,27 +88,5 @@ class DayForecastItem extends StatelessWidget {
         const SizedBox(width: 10),
       ],
     );
-  }
-}
-
-String _weekday(int weekday) {
-  switch (weekday) {
-    case 1:
-      return 'Пн';
-    case 2:
-      return 'Вт';
-    case 3:
-      return 'Ср';
-    case 4:
-      return 'Чт';
-    case 5:
-      return 'Пт';
-    case 6:
-      return 'Сб';
-    case 7:
-      return 'Вс';
-
-    default:
-      return weekday.toString();
   }
 }

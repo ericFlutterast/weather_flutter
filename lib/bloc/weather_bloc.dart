@@ -21,7 +21,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   Future<void> _getWeather(WeatherEvent event, Emitter<WeatherState> emitter) async {
     final WeatherObject weather = await _weatherRepo.getDataAPI();
     final SunriseSunsetData sunriseSunsetData = await _weatherRepo.getSunseSunriseData();
-    final String currenCondition = ConditionModel.returnCondition(weather.fact.condition)!;
+    final String currenCondition = ConditionModel().getValue(weather.fact.condition)!;
     final int currentTemperature = weather.fact.temp;
     final int minTemp = weather.forecast[0].parts.night.tempMin;
     final int maxTemp = weather.forecast[0].parts.day.tempMax;

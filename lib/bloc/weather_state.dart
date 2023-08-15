@@ -22,7 +22,13 @@ class WeatherState {
   });
 
   @override
-  bool operator ==(Object other) => other is WeatherState && other.runtimeType == runtimeType && other.currentTemp == currentTemp && other.maxTemp == maxTemp && other.minTemp == minTemp && other.curretnCondition == curretnCondition;
+  bool operator ==(Object other) =>
+      other is WeatherState &&
+      other.runtimeType == runtimeType &&
+      other.currentTemp == currentTemp &&
+      other.maxTemp == maxTemp &&
+      other.minTemp == minTemp &&
+      other.curretnCondition == curretnCondition;
 
   @override
   int get hashCode => currentTemp.hashCode;
