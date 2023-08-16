@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'degrees_circle.dart';
+import 'degrees.dart';
 
 class HourForecastItem extends StatelessWidget {
   final String hour;
@@ -42,7 +42,7 @@ class HourForecastItem extends StatelessWidget {
             const SizedBox(width: 2),
             if (temp is int) ...[
               CustomPaint(
-                painter: DegreesCircle(color: Colors.white, size: 5, width: 2),
+                painter: DegreesCircle(color: Colors.white, size: 5, width: 2, offset: const Offset(0, 0)),
                 size: const Size(0, 13),
               ),
             ]

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../bloc/weather_bloc.dart';
-import 'degrees_circle.dart';
+import 'degrees.dart';
 import 'mixin_content_opacity.dart';
 
-class EdgeForecastForTheDay extends SliverPersistentHeaderDelegate
-    with ContentOpacity {
+class EdgeForecastForTheDay extends SliverPersistentHeaderDelegate with ContentOpacity {
   final WeatherState state;
   double maxExtents;
   double minExtants;
@@ -28,8 +27,7 @@ class EdgeForecastForTheDay extends SliverPersistentHeaderDelegate
   }
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     Color contentColor = const Color.fromRGBO(250, 255, 255, 1).withOpacity(
       contentOpacity(shrinkOffset, maxExtent),
     );
@@ -94,6 +92,7 @@ class LimDegrees extends StatelessWidget {
               size: 5,
               width: 2,
               color: color,
+              offset: const Offset(0, 0),
             ),
           ),
         ),

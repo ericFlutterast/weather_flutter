@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../bloc/weather_bloc.dart';
-import 'degrees_circle.dart';
+import 'degrees.dart';
 import 'mixin_content_opacity.dart';
 
-class CurrentTempDelegate extends SliverPersistentHeaderDelegate
-    with ContentOpacity {
+class CurrentTempDelegate extends SliverPersistentHeaderDelegate with ContentOpacity {
   final WeatherState state;
   double maxExtents;
   double minExtants;
@@ -28,34 +27,14 @@ class CurrentTempDelegate extends SliverPersistentHeaderDelegate
   }
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    Color contentColor = const Color.fromRGBO(254, 254, 252, 1)
-        .withOpacity(contentOpacity(shrinkOffset, maxExtent));
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          '${state.currentTemp}',
-          style: TextStyle(
-            fontSize: maxExtent,
-            fontWeight: FontWeight.w200,
-            color: contentColor,
-          ),
-        ),
-        const SizedBox(width: 5),
-        Padding(
-          padding: const EdgeInsets.only(top: 22),
-          child: CustomPaint(
-            painter: DegreesCircle(
-              size: 20,
-              width: 3,
-              color: contentColor,
-            ),
-          ),
-        ),
-      ],
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    Color contentColor =
+        const Color.fromRGBO(254, 254, 252, 1).withOpacity(contentOpacity(shrinkOffset, maxExtent));
+    return DegreesWidget(
+      currentTemp: state.currentTemp.toString(),
+      size: maxExtents,
+      color: contentColor,
+      offset: const Offset(0, 23),
     );
   }
 }
