@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'mixin_content_opacity.dart';
 
-class HeaderDelegate extends SliverPersistentHeaderDelegate
-    with ContentOpacity {
+class HeaderDelegate extends SliverPersistentHeaderDelegate with ContentOpacity {
   final bool? isHeader;
   double maxExtents;
   double minExtents;
@@ -28,10 +27,9 @@ class HeaderDelegate extends SliverPersistentHeaderDelegate
   }
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    Color changesOpacityColor = const Color.fromARGB(0, 250, 255, 255)
-        .withOpacity(contentOpacity(shrinkOffset, maxExtent));
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    Color changesOpacityColor =
+        const Color.fromARGB(0, 250, 255, 255).withOpacity(contentOpacity(shrinkOffset, maxExtent));
     Color regularColor = const Color.fromRGBO(250, 255, 255, 1);
 
     return Align(

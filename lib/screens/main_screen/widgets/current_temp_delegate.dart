@@ -33,7 +33,7 @@ class CurrentTempDelegate extends SliverPersistentHeaderDelegate with ContentOpa
     return DegreesWidget(
       currentTemp: state.currentTemp.toString(),
       size: maxExtents,
-      color: contentColor,
+      color: Colors.white,
       offset: const Offset(0, 23),
     );
   }

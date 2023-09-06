@@ -7,7 +7,6 @@ import 'package:weather_flutter/bloc/weather_bloc.dart';
 import 'package:weather_repository/src/weather_repository.dart';
 import '../../theme/app_theme.dart';
 import 'widgets/current_temp_delegate.dart';
-import 'widgets/edge_forecat_for_the_day.dart';
 import 'widgets/header_delegate.dart';
 import 'widgets/hour_forecast.dart';
 import 'widgets/ten_days_forecast.dart';
@@ -20,8 +19,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  late ScrollController _controller;
-  //late double _scrollOffset;
+  late ScrollController _scrollController;
 
   Future<void> getWeather() async {}
 
@@ -32,14 +30,16 @@ class _MainScreenState extends State<MainScreen> {
     Future.delayed(const Duration(seconds: 2));
     context.read<WeatherBloc>().add(GetWeather());
 
-    _controller = ScrollController();
+    _scrollController = ScrollController();
 
-    _controller.addListener(_scrollListener);
+    _scrollController.addListener(_scrollListener);
   }
 
   void _scrollListener() {
+    var stringOffset = _scrollController.offset.toString();
+
     setState(() {
-      //_scrollOffset = _controller.offset;
+      print('controller offset ${stringOffset.toString().substring(0, stringOffset.indexOf('.'))}');
     });
   }
 
@@ -58,7 +58,7 @@ class _MainScreenState extends State<MainScreen> {
 
             return Center(
               child: CustomScrollView(
-                controller: _controller,
+                controller: _scrollController,
                 slivers: [
                   //city name
                   SliverPersistentHeader(
@@ -83,29 +83,9 @@ class _MainScreenState extends State<MainScreen> {
                     child: SizedBox(height: 5),
                   ),
 
-                  SliverPersistentHeader(
-                    delegate: HeaderDelegate(
-                      maxExtents: 24,
-                      minExtents: 24,
-                      title: state.curretnCondition.toString(),
-                    ),
-                    pinned: true,
-                  ),
-
                   const SliverToBoxAdapter(
                     child: SizedBox(height: 10),
                   ),
-
-                  SliverPersistentHeader(
-                    pinned: true,
-                    delegate: EdgeForecastForTheDay(
-                      maxExtents: 21,
-                      minExtants: 21,
-                      state: state,
-                    ),
-                  ),
-
-                  //
 
                   const SliverToBoxAdapter(
                     child: SizedBox(height: 50),
@@ -129,7 +109,13 @@ class _MainScreenState extends State<MainScreen> {
                       child: TenDaysForecast(state: state),
                     ),
                   ),
-                  const SliverToBoxAdapter(child: SizedBox(height: 50)),
+
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: TenDaysForecast(state: state),
+                    ),
+                  ),
                 ],
               ),
             );
